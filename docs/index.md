@@ -3,9 +3,16 @@
 # MaskedMimic-Manipulator 
 
 本项目 MaskedMimic-Manipulator 是一种构建在 MaskedMimic 框架上的 端到端人形操控系统，目标是利用深度网络自动生成自然、可控且物理一致的人体运动，实现对物体的灵巧操作。
+
+---
+
+## 一、概述
+
+### 1.1 特点
+
 与传统使用物理引导、逆运动学或手工设计控制器的管线不同，本项目强调：
 
-### 1. 真正的端到端控制（End-to-End Control）
+#### 1. 真正的端到端控制（End-to-End Control）
 
 - 输入：观察到的身体部分关节位姿、物体状态、以及可选的目标任务信息；
 
@@ -19,7 +26,7 @@
 
 - 控制规律由模型自动学习得到，支持更复杂的非线性动作协调。
 
-### 2. 基于 VAE 的动作风格潜变量（Natural Motion Latent）
+#### 2. 基于 VAE 的动作风格潜变量（Natural Motion Latent）
 
 为了避免出现常见的“奇怪手势”“僵硬动作”“错误补全姿态”等问题，
 项目采用 VAE（Variational Autoencoder）结构来学习人体自然动作风格：
@@ -38,7 +45,7 @@
 
 - 不容易出现“歪着身体抓东西”“完全不动躯干”等不自然行为。
 
-### 3. 稀疏控制能力：只指定部分关节，其余由神经网络自适应补全
+#### 3. 稀疏控制能力：只指定部分关节，其余由神经网络自适应补全
 
 在远程控制（teleoperation）或 VR 输入中，常见情况是：
 
@@ -64,11 +71,7 @@
 
 也非常适合未来扩展为遥操作机械人或全身 teleoperation。
 
----
-
-## 概述
-
-### 与相关工作的关系
+### 1.2 与相关工作的关系
 
 本项目基于 **MaskedMimic 的开源代码**实现，研究目标与 NVIDIA 最新提出的 **MaskedManipulator** 有部分重叠，但二者在实现方式与训练目标上并不完全相同。由于 MaskedManipulator 也是在 MaskedMimic 基础上扩展，因此两者在能力和框架上会有一定相似性，这是方法路线上的自然结果，而非直接参考其实现。
 
@@ -90,7 +93,7 @@
 
 ---
 
-## 效果展示
+## 二、效果展示
 
 一个统一的 MaskedManipulator 控制器可以在不同条件（输入形式）下工作，从而生成丰富多样的行为。\
 下面我们按照网页结构，把几个典型应用场景拆分成小节展示。
@@ -107,7 +110,7 @@
 - **远程操作（teleoperation）**：\
   从头显和手柄的传感器信号中，推断出完整的人体动作。
 
-#### 1.1 全身跟踪（Full-body Tracking）
+#### 全身跟踪（Full-body Tracking）
 
 给定完整的动作捕捉序列，我们的方法可以在物理仿真中重建出与之匹配、\
 同时又保持动态合理的全身运动。
@@ -136,7 +139,7 @@
 
 系统需要补全**身体、腿部、躯干**等的动作，使得整体看起来自然、合理。
 
-#### 2.1 远程操作（Teleoperation）
+#### 远程操作（Teleoperation）
 
 在只提供头、手以及物体约束的情况下，\
 MaskedManipulator 仍然能够生成自然的全身动作，\
@@ -196,6 +199,6 @@ MaskedManipulator 仍然能够生成自然的全身动作，\
 </div>
 ```
 
-## 相关参考：
+## 三、相关参考
 1. MaskedMimic- Unified Physics-Based Character Control Through Masked Motion Inpainting
 2. PULSE -UNIVERSAL HUMANOID MOTION REPRESENTATIONS FOR PHYSICS-BASED CONTROL
