@@ -199,6 +199,16 @@ MaskedManipulator 仍然能够生成自然的全身动作，\
 </div>
 ```
 
-## 三、相关参考
+## 四、未来待改进点
+### 1. sim2real
+本项目的策略网络采用基于 VAE 的结构，通过 Encoder 将高维观测压缩为一个 高层次动作隐变量（latent），用于表达抓取动作的意图、风格与时序结构。这种结构不仅能够提升模仿学习的稳定性，也为后续的 sim-to-real 改进提供了良好扩展性。
+
+在未来的版本中，VAE 的 latent 将进一步 因子化（factorize）为两个独立子空间：
+（1）动作风格 latent：捕捉抓取行为的高层指令与风格，使策略在不同动力学条件下仍保持一致的动作结构；
+（2）动力学适应 latent：用于表示真实环境与仿真环境之间的动力学差异（如摩擦、质量、惯量、关节响应、传感器噪声等）。该 latent 可以通过 domain randomization 或在线系统辨识模型实时估计，从而让策略能在真实机器人上自动适应动力学偏移。
+
+通过这种 “动作意图 + 动力学差异” 的分离式 latent 结构，策略将具备更强的跨域泛化能力，是通向稳定 sim-to-real 的关键一步。
+
+## 五、相关参考
 1. MaskedMimic- Unified Physics-Based Character Control Through Masked Motion Inpainting
 2. PULSE -UNIVERSAL HUMANOID MOTION REPRESENTATIONS FOR PHYSICS-BASED CONTROL
